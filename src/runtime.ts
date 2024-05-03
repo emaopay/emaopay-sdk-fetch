@@ -13,7 +13,7 @@
  */
 
 
-export const BASE_PATH = "http://emaopay.com/v2".replace(/\/+$/, "");
+export const BASE_PATH = "http://emaopay.com".replace(/\/+$/, "");
 
 export interface ConfigurationParameters {
     basePath?: string; // override base path
