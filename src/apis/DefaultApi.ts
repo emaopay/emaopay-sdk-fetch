@@ -94,7 +94,6 @@ export interface CreateNewMonitorRequest {
 }
 
 export interface CreateOrderRequest {
-    xSignature: string;
     params: EmaopayCreateOrderParams;
 }
 
@@ -397,13 +396,6 @@ export class DefaultApi extends runtime.BaseAPI {
      * 创建订单
      */
     async createOrderRaw(requestParameters: CreateOrderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EmaopayOrder>> {
-        if (requestParameters['xSignature'] == null) {
-            throw new runtime.RequiredError(
-                'xSignature',
-                'Required parameter "xSignature" was null or undefined when calling createOrder().'
-            );
-        }
-
         if (requestParameters['params'] == null) {
             throw new runtime.RequiredError(
                 'params',
@@ -416,10 +408,6 @@ export class DefaultApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
-
-        if (requestParameters['xSignature'] != null) {
-            headerParameters['X-Signature'] = String(requestParameters['xSignature']);
-        }
 
         const response = await this.request({
             path: `/api/orders`,
