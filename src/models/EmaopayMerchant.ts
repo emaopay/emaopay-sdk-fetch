@@ -36,6 +36,12 @@ export interface EmaopayMerchant {
      * @type {string}
      * @memberof EmaopayMerchant
      */
+    description?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmaopayMerchant
+     */
     id?: string;
     /**
      * 
@@ -82,6 +88,7 @@ export function EmaopayMerchantFromJSONTyped(json: any, ignoreDiscriminator: boo
         
         'createdAt': json['createdAt'] == null ? undefined : (new Date(json['createdAt'])),
         'deletedAt': json['deletedAt'] == null ? undefined : (new Date(json['deletedAt'])),
+        'description': json['description'] == null ? undefined : json['description'],
         'id': json['id'] == null ? undefined : json['id'],
         'key': json['key'] == null ? undefined : json['key'],
         'name': json['name'] == null ? undefined : json['name'],
@@ -98,6 +105,7 @@ export function EmaopayMerchantToJSON(value?: EmaopayMerchant | null): any {
         
         'createdAt': value['createdAt'] == null ? undefined : ((value['createdAt']).toISOString()),
         'deletedAt': value['deletedAt'] == null ? undefined : ((value['deletedAt']).toISOString()),
+        'description': value['description'],
         'id': value['id'],
         'key': value['key'],
         'name': value['name'],
