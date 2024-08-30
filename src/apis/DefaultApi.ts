@@ -145,6 +145,7 @@ export interface GetPagedOrderListRequest {
     status: string;
     merchantId: string;
     productId: string;
+    searchKey: string;
     pageIndex: number;
     pageSize: number;
 }
@@ -913,6 +914,13 @@ export class DefaultApi extends runtime.BaseAPI {
             );
         }
 
+        if (requestParameters['searchKey'] == null) {
+            throw new runtime.RequiredError(
+                'searchKey',
+                'Required parameter "searchKey" was null or undefined when calling getPagedOrderList().'
+            );
+        }
+
         if (requestParameters['pageIndex'] == null) {
             throw new runtime.RequiredError(
                 'pageIndex',
@@ -940,7 +948,7 @@ export class DefaultApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
-            path: `/api/orders`.replace(`{${"status"}}`, encodeURIComponent(String(requestParameters['status']))).replace(`{${"merchantId"}}`, encodeURIComponent(String(requestParameters['merchantId']))).replace(`{${"productId"}}`, encodeURIComponent(String(requestParameters['productId']))),
+            path: `/api/orders`.replace(`{${"status"}}`, encodeURIComponent(String(requestParameters['status']))).replace(`{${"merchantId"}}`, encodeURIComponent(String(requestParameters['merchantId']))).replace(`{${"productId"}}`, encodeURIComponent(String(requestParameters['productId']))).replace(`{${"searchKey"}}`, encodeURIComponent(String(requestParameters['searchKey']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
