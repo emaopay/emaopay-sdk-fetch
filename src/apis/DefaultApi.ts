@@ -892,7 +892,7 @@ export class DefaultApi extends runtime.BaseAPI {
      * 获取订单列表
      * 获取订单列表
      */
-    async getPagedOrderListRaw(requestParameters: GetPagedOrderListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<EmaopayPagedResponseEmaopayOrder>>> {
+    async getPagedOrderListRaw(requestParameters: GetPagedOrderListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EmaopayPagedResponseEmaopayOrder>> {
         if (requestParameters['status'] == null) {
             throw new runtime.RequiredError(
                 'status',
@@ -954,14 +954,14 @@ export class DefaultApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(EmaopayPagedResponseEmaopayOrderFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => EmaopayPagedResponseEmaopayOrderFromJSON(jsonValue));
     }
 
     /**
      * 获取订单列表
      * 获取订单列表
      */
-    async getPagedOrderList(requestParameters: GetPagedOrderListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<EmaopayPagedResponseEmaopayOrder>> {
+    async getPagedOrderList(requestParameters: GetPagedOrderListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EmaopayPagedResponseEmaopayOrder> {
         const response = await this.getPagedOrderListRaw(requestParameters, initOverrides);
         return await response.value();
     }
